@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.megster.ble.chat" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Bluetooth Chat</name>
+    <description>
+        A sample app from a phone  BLE hardware.
+    </description>
+    <author >
+         Baseret på eksempel af Don Coleman https://github.com/don/cordova-plugin-ble-central revideret af Lone Østerlund
+    </author>
+
+    <content src="index.html" />
+	<gap:plugin name="cordova-plugin-ble-central" source="npm" />
+<preference name="phonegap-version" value="cli-6.1.0" />
+    <access origin="*" />
+</widget>
