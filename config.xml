@@ -14,8 +14,14 @@
 <plugin name="cordova-plugin-ble-central" spec="1.1.4" />
 
 <preference name="phonegap-version" value="cli-6.5.0" />
-    <access origin="*" />
-	 <platform name="android">
+     <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
         <allow-intent href="market:*" />
     </platform>
 </widget>
