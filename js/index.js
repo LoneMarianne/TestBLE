@@ -33,10 +33,9 @@ function stringToBytes(string) {
 }
 
 // this is RedBear Lab's UART service
-var redbear = {
-    serviceUUID: "713D0000-503E-4C75-BA94-3148F18D941E",
-    txCharacteristic: "713D0003-503E-4C75-BA94-3148F18D941E", // transmit is from the phone's perspective
-    rxCharacteristic: "713D0002-503E-4C75-BA94-3148F18D941E"  // receive is from the phone's perspective
+var blue= {
+    serviceUUID: "0000FFE0-0000-1000-8000-00805F9B34FB",
+    characteristicUUID: "0000FFE1-0000-1000-8000-00805F9B34FB"
 };
 
 var app = {
@@ -60,7 +59,7 @@ var app = {
             ble.scan([], 5, app.onDiscoverDevice, app.onError);
         } else {
 			alert("Disconnected");
-           // ble.scan([redbear.serviceUUID], 5, app.onDiscoverDevice, app.onError);
+            ble.scan([blue.serviceUUID], 5, app.onDiscoverDevice, app.onError);
         }
     },
     onDiscoverDevice: function(device) {
@@ -77,7 +76,7 @@ var app = {
         var deviceId = e.target.dataset.deviceId,
             onConnect = function() {
                 // subscribe for incoming data
-				// ble.startNotification(deviceId, redbear.serviceUUID, redbear.rxCharacteristic, app.onData, app.onError);
+				 ble.startNotification(deviceId, blue.serviceUUID, blue.characteristicUUID, app.onData, app.onError);
                 sendButton.dataset.deviceId = deviceId;
                 disconnectButton.dataset.deviceId = deviceId;
                 app.showDetailPage();
@@ -104,7 +103,7 @@ var app = {
 
         var data = stringToBytes(messageInput.value);
         var deviceId = event.target.dataset.deviceId;
-        ble.writeWithoutResponse(deviceId, redbear.serviceUUID, redbear.txCharacteristic, data, success, failure);
+        ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
 
     },
     disconnect: function(event) {
