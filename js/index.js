@@ -98,7 +98,7 @@ var app = {
         };
 
         var failure = function() {
-            alert("Failed writing data to the redbear hardware");
+            alert("Failed writing data to the Arduino");
         };
 
         var data = stringToBytes(messageInput.value);
