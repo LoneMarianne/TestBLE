@@ -5,8 +5,8 @@
 */
 
 #include <SoftwareSerial.h>
-int bluetoothTx = 3;
-int bluetoothRx = 4;
+int bluetoothTx = 5;
+int bluetoothRx = 6;
 
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);//Arduino RX,Tx
 
@@ -36,7 +36,9 @@ void setup() {
   sendCommand("AT+TYPE");
   sendCommand("AT+TYPE");
   //   sendCommand("AT+RESET");
-  sendCommand("AT+START");
+  //sendCommand("AT+START");
+  sendCommand("AT+CHAR");
+ // sendCommand("AT+START");
 }
 
 /*
@@ -50,26 +52,65 @@ void setup() {
   }
 */
 int count = 0;
+char c=' ';
+boolean NL = true;
+
+/*
+void loop()
+{
+    // Read from the Bluetooth module and send to the Arduino Serial Monitor
+    if (bluetooth.available())
+    {
+        c = bluetooth.read();
+        Serial.write(c);
+    }
+ 
+ 
+    // Read from the Serial Monitor and send to the Bluetooth module
+    if (Serial.available())
+    {
+        c = Serial.read();
+ 
+        // do not send line end characters to the HM-10
+        if (c!=10 & c!=13 ) 
+        {  
+             bluetooth.write(c);
+        }
+ 
+        // Echo the user input to the main window. 
+        // If there is a new line print the ">" character.
+        if (NL) { Serial.print("\r\n>");  NL = false; }
+        Serial.write(c);
+        if (c==10) { NL = true; }
+    }
+}
+*/
+
+
 void loop() {
   if (bluetooth.available())
 
   {
-    while ( bluetooth.available() )
+    while ( bluetooth.available() ){
+   
       Serial.write(bluetooth.read());
 
-    Serial.println();
+    }
   }
 
    if ( Serial.available() )
     {
      delay(5);
 
-     while ( Serial.available() )
-         bluetooth.write( Serial.read() );
+     while ( Serial.available() ){
+         c= Serial.read();
+         bluetooth.write( c );
+         Serial.write(c);
+     }  
     }
- /* bluetooth.write(count);
-  count++;
-  delay(1000);*/
+ // bluetooth.write(count);
+ // count++;
+//  delay(1000);
 }
 
 void sendCommand (String command) {
